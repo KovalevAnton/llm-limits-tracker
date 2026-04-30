@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LLM Limits</title>
+  <script>
+    // Boot: resolve theme before stylesheet evaluates to avoid a flash of the
+    // wrong palette. Migrates legacy theme keys (dark/light/glass/gpro/off)
+    // from earlier versions onto the current set.
+    (function () {
+      try {
+        var KEY = 'llm-limits-tracker.theme';
+        var pref = localStorage.getItem(KEY) || 'system';
+        var migrate = { dark: 'glass-dark', light: 'glass-light', glass: 'system', gpro: 'glass-dark', off: 'glass-light' };
+        if (migrate[pref]) { pref = migrate[pref]; localStorage.setItem(KEY, pref); }
+        var resolved = pref;
+        if (pref === 'system') {
+          resolved = matchMedia('(prefers-color-scheme: dark)').matches ? 'glass-dark' : 'glass-light';
+        }
+        document.documentElement.dataset.theme = resolved;
+        document.documentElement.dataset.themePref = pref;
+      } catch (_) {
+        document.documentElement.dataset.theme = 'glass-light';
+        document.documentElement.dataset.themePref = 'system';
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <aside class="sb">
+    <div class="sb-brand">
+      <div class="sb-logo">L</div>
+      <div class="sb-brand-name">LLM&nbsp;Limits</div>
+    </div>
+    <nav class="sb-nav">
+      <button data-tab="dashboard" class="active" data-i18n="nav.dashboard"></button>
+      <button data-tab="settings" data-i18n="nav.settings"></button>
+      <button data-tab="about" data-i18n="nav.about"></button>
+    </nav>
+
+    <div class="sb-bottom">
+      <button type="button" id="aurora-toggle" class="aurora-toggle" aria-pressed="true" title="Background colors"><span class="swatch" aria-hidden="true"></span></button>
+      <div class="lang-pill" id="lang-pills" role="tablist" aria-label="Language">
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="zh">中</button>
+      </div>
+      <div class="lang-pill" id="theme-pills" role="tablist" aria-label="Theme">
+        <button type="button" data-theme-pick="system"      title="System">SYS</button>
+        <button type="button" data-theme-pick="glass-light" title="Apple Glass — Light">Lt</button>
+        <button type="button" data-theme-pick="glass-dark"  title="Apple Glass — Dark">Dk</button>
+        <button type="button" data-theme-pick="hacker"      title="Hacker">Hx</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section id="tab-dashboard">
+      <h1 class="h2" data-i18n="dashboard.title"></h1>
+      <p class="subtitle" data-i18n="dashboard.subtitle"></p>
+
+      <div class="chips" id="chips"></div>
+      <div class="alerts" id="alerts"></div>
+
+      <div class="toolbar">
+        <button class="btn-primary" id="refresh-btn" type="button"></button>
+        <button class="btn-ghost" id="auto-refresh-toggle" type="button"></button>
+        <span class="updated" id="updated-wrap">
+          <span class="accentdot"></span>
+          <span id="last-checked"></span>
+        </span>
+      </div>
+
+      <div id="dashboard-body"></div>
+    </section>
+
+    <section id="tab-settings" class="hidden">
+      <h1 class="h2" data-i18n="settings.title"></h1>
+      <p class="subtitle" data-i18n="settings.subtitle"></p>
+      <div class="grid" id="settings-grid"></div>
+      <div class="card threshold-card">
+        <h3 class="h3" data-i18n="settings.thresholds"></h3>
+        <p class="help" data-i18n="settings.thresholdsHelp"></p>
+        <div class="threshold-row">
+          <div>
+            <label data-i18n="settings.warnLabel"></label>
+            <input type="text" id="threshold-warn" value="80" />
+          </div>
+          <div>
+            <label data-i18n="settings.badLabel"></label>
+            <input type="text" id="threshold-bad" value="95" />
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 24px;">
+        <button class="btn-primary" id="save-settings" type="button" data-i18n="settings.save"></button>
+      </div>
+    </section>
+
+    <section id="tab-about" class="hidden">
+      <h1 class="h2" data-i18n="about.title"></h1>
+      <p class="subtitle" data-i18n="about.subtitle"></p>
+      <div class="card" id="about-card"></div>
+    </section>
+  </main>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
