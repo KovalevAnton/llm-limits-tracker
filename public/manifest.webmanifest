@@ -1,0 +1,16 @@
+{
+  "name": "LLM Limits Tracker",
+  "short_name": "LLM Limits",
+  "description": "Beautiful local dashboard for LLM API rate limits — 8 providers, 3 themes, 5 languages, zero dependencies.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#06070d",
+  "background_color": "#06070d",
+  "icons": [
+    { "src": "/favicon.svg",          "sizes": "any",     "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/apple-touch-icon.svg", "sizes": "180x180", "type": "image/svg+xml" }
+  ],
+  "categories": ["developer", "utilities", "productivity"]
+}

@@ -1,6 +1,6 @@
 {
   "name": "llm-limits-tracker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Local dashboard for LLM API rate limits across Claude, GPT, Gemini, OpenRouter, Groq, Fireworks, Mistral and Together. Zero dependencies.",
   "bin": {
     "llm-limits-tracker": "./server.js"

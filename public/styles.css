@@ -91,7 +91,6 @@
 }
 [data-theme="hacker"] .btn-primary:hover { background: var(--accent-soft); }
 [data-theme="hacker"] .btn-ghost { border-radius: 2px; text-transform: uppercase; letter-spacing: .06em; font-size: 12px; }
-[data-theme="hacker"] .icon-btn { border-radius: 2px; }
 [data-theme="hacker"] .lang-pill { border-radius: 2px; border: 1px solid var(--border); background: transparent; }
 [data-theme="hacker"] .lang-pill button.active { background: var(--accent-soft); color: var(--accent); border-radius: 0; }
 [data-theme="hacker"] .sb-nav button { border-radius: 2px; font-family: var(--mono); }
@@ -119,7 +118,6 @@
   background-image: repeating-linear-gradient(90deg, var(--bad) 0 6px, transparent 6px 8px);
   border-radius: 0;
 }
-[data-theme="hacker"] .stripe { display: none; }
 [data-theme="hacker"] .updated .accentdot { border-radius: 0; }
 
 /* ===== APPLE GLASS — LIGHT ===== */
@@ -195,8 +193,7 @@
 }
 [data-theme="glass-light"] .alert,
 [data-theme="glass-light"] .chip,
-[data-theme="glass-light"] .lang-pill,
-[data-theme="glass-light"] .icon-btn {
+[data-theme="glass-light"] .lang-pill {
   background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.30));
   -webkit-backdrop-filter: blur(18px) saturate(170%);
   backdrop-filter: blur(18px) saturate(170%);
@@ -264,7 +261,6 @@
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 [data-theme="glass-light"] .subtitle { font-size: 15.5px; }
-[data-theme="glass-light"] .stripe { width: 3px; box-shadow: 0 0 12px currentColor; }
 
 /* ===== APPLE GLASS — DARK ===== */
 [data-theme="glass-dark"] {
@@ -385,8 +381,7 @@
 [data-theme="glass-dark"] .pill.bad  { color: oklch(0.78 0.22 20); background: oklch(0.30 0.15 20 / .35); }
 [data-theme="glass-dark"] .chip,
 [data-theme="glass-dark"] .alert,
-[data-theme="glass-dark"] .lang-pill,
-[data-theme="glass-dark"] .icon-btn {
+[data-theme="glass-dark"] .lang-pill {
   background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
@@ -427,7 +422,6 @@
   border: .5px solid rgba(255,255,255,.16);
   box-shadow: 0 1px 0 rgba(255,255,255,.18) inset;
 }
-[data-theme="glass-dark"] .stripe { width: 3px; box-shadow: 0 0 16px currentColor, 0 0 4px currentColor; }
 [data-theme="glass-dark"] .updated .accentdot { box-shadow: 0 0 10px var(--accent); }
 
 /* ===== Aurora toggle =====
@@ -481,6 +475,42 @@
   border: .5px solid rgba(255,255,255,.16);
   box-shadow: 0 1px 0 rgba(255,255,255,.16) inset;
 }
+
+/* GitHub link — same footprint as aurora-toggle, always visible. */
+.github-link {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 30px; height: 30px; padding: 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .12s, border-color .12s, transform .12s;
+}
+.github-link:hover { color: var(--text); border-color: var(--border-strong); }
+.github-link:active { transform: scale(0.96); }
+.github-link svg { width: 16px; height: 16px; display: block; }
+[data-theme="glass-light"] .github-link {
+  background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.30));
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  border: .5px solid rgba(255,255,255,.7);
+  box-shadow: 0 1px 0 rgba(255,255,255,.85) inset;
+}
+[data-theme="glass-dark"] .github-link {
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: .5px solid rgba(255,255,255,.16);
+  box-shadow: 0 1px 0 rgba(255,255,255,.16) inset;
+  color: var(--text-muted);
+}
+[data-theme="glass-dark"] .github-link:hover { color: #fff; }
+[data-theme="hacker"] .github-link {
+  border-radius: 2px; border: 1px solid var(--border); background: transparent;
+}
+[data-theme="hacker"] .github-link:hover { color: var(--accent); border-color: var(--accent); }
 
 /* Aurora-off overrides: drop the colourful page backdrops. */
 [data-aurora="off"][data-theme="glass-light"] body {
@@ -556,14 +586,6 @@ strong { font-weight: 600; }
 }
 
 .sb-row { display: flex; align-items: center; gap: 8px; }
-.icon-btn {
-  width: 30px; height: 30px; border-radius: 8px;
-  border: 1px solid var(--border); background: var(--surface);
-  display: grid; place-items: center; cursor: pointer; color: var(--text-muted);
-  transition: color .12s, border-color .12s;
-}
-.icon-btn:hover { border-color: var(--border-strong); color: var(--text); }
-.icon-btn svg { width: 14px; height: 14px; }
 
 /* ===== Main ===== */
 .main { padding: 48px; max-width: 1100px; }
@@ -658,12 +680,6 @@ strong { font-weight: 600; }
 }
 @keyframes cardIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); }
-.card .stripe {
-  position: absolute; left: 0; top: 14px; bottom: 14px;
-  width: 2px; border-radius: 999px;
-}
-.card.warn .stripe { background: var(--warn); }
-.card.bad  .stripe { background: var(--bad); }
 
 .c-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
 .c-prov { font-size: 15px; font-weight: 600; letter-spacing: -0.005em; }
@@ -763,16 +779,6 @@ input[type=text]:focus, input[type=password]:focus {
 #tab-about p.help { color: var(--text-muted); font-size: 13.5px; }
 #tab-about ul { padding-left: 24px; line-height: 1.8; }
 #tab-about li { color: var(--text); margin-bottom: 4px; }
-
-/* toast */
-.toast {
-  position: fixed; bottom: 24px; right: 24px;
-  background: var(--text); color: var(--bg);
-  padding: 10px 16px; border-radius: 10px;
-  font: 500 13px/1 var(--ui); box-shadow: var(--shadow-md);
-  z-index: 99; animation: toastIn .18s ease;
-}
-@keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 .hidden { display: none; }
 

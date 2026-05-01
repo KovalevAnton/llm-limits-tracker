@@ -1,0 +1,122 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <title>LLM Limits — local dashboard for LLM API rate limits</title>
+
+  <defs>
+    <radialGradient id="g1" cx="20%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="oklch(0.65 0.28 290)" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="85%" cy="15%" r="45%">
+      <stop offset="0%" stop-color="oklch(0.70 0.26 200)" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="65%" cy="95%" r="55%">
+      <stop offset="0%" stop-color="oklch(0.68 0.28 330)" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="logo-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d97757"/>
+      <stop offset="100%" stop-color="#c25837"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cfcad8" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background with aurora -->
+  <rect width="1200" height="630" fill="#06070d"/>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <rect width="1200" height="630" fill="url(#g2)"/>
+  <rect width="1200" height="630" fill="url(#g3)"/>
+
+  <!-- Subtle grid suggestion -->
+  <g opacity="0.04" stroke="#fff" stroke-width="1">
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+  </g>
+
+  <!-- Logo + product mark -->
+  <g transform="translate(80, 140)">
+    <rect width="72" height="72" rx="16" fill="url(#logo-bg)"/>
+    <path d="M22 18h6.5v28.4h17.7V53H22z" fill="#fff" transform="translate(0,3)"/>
+  </g>
+
+  <!-- Title -->
+  <text x="80" y="320" fill="url(#title)" font-family="ui-serif, Georgia, 'Iowan Old Style', serif"
+        font-size="108" font-weight="500" font-style="italic" letter-spacing="-3">
+    LLM Limits
+  </text>
+
+  <!-- Tagline -->
+  <text x="80" y="376" fill="#f4f1ff" opacity="0.72"
+        font-family="ui-sans-serif, -apple-system, system-ui, sans-serif"
+        font-size="28" font-weight="400">
+    Local dashboard for LLM API rate limits.
+  </text>
+  <text x="80" y="412" fill="#f4f1ff" opacity="0.50"
+        font-family="ui-sans-serif, -apple-system, system-ui, sans-serif"
+        font-size="22" font-weight="400" font-style="italic">
+    One glance instead of eight consoles.
+  </text>
+
+  <!-- Feature pills -->
+  <g transform="translate(80, 472)" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="2">
+    <g transform="translate(0,0)">
+      <rect width="148" height="36" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)" stroke-width="0.5"/>
+      <text x="74" y="23" fill="#f4f1ff" text-anchor="middle">8 PROVIDERS</text>
+    </g>
+    <g transform="translate(160,0)">
+      <rect width="116" height="36" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)" stroke-width="0.5"/>
+      <text x="58" y="23" fill="#f4f1ff" text-anchor="middle">6 THEMES</text>
+    </g>
+    <g transform="translate(288,0)">
+      <rect width="138" height="36" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)" stroke-width="0.5"/>
+      <text x="69" y="23" fill="#f4f1ff" text-anchor="middle">4 LANGUAGES</text>
+    </g>
+    <g transform="translate(438,0)">
+      <rect width="124" height="36" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)" stroke-width="0.5"/>
+      <text x="62" y="23" fill="#f4f1ff" text-anchor="middle">ZERO DEPS</text>
+    </g>
+  </g>
+
+  <!-- npm command (right side, monospace block) -->
+  <g transform="translate(720, 160)">
+    <rect width="400" height="220" rx="20" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)" stroke-width="0.5"/>
+    <!-- Window dots -->
+    <circle cx="32" cy="32" r="6" fill="#ff5f57"/>
+    <circle cx="56" cy="32" r="6" fill="#febc2e"/>
+    <circle cx="80" cy="32" r="6" fill="#28c840"/>
+
+    <text x="32" y="100" fill="#a39e92" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="16">$</text>
+    <text x="52" y="100" fill="#f4f1ff" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="20" font-weight="500">npx llm-limits-tracker</text>
+
+    <text x="32" y="148" fill="#a39e92" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="14">▸ http://localhost:5173</text>
+
+    <!-- mini progress bars to hint at the product -->
+    <g transform="translate(32, 170)">
+      <rect width="336" height="3" rx="1.5" fill="rgba(255,255,255,0.10)"/>
+      <rect width="290" height="3" rx="1.5" fill="oklch(0.72 0.22 20)"/>
+    </g>
+    <g transform="translate(32, 184)">
+      <rect width="336" height="3" rx="1.5" fill="rgba(255,255,255,0.10)"/>
+      <rect width="200" height="3" rx="1.5" fill="oklch(0.84 0.16 80)"/>
+    </g>
+    <g transform="translate(32, 198)">
+      <rect width="336" height="3" rx="1.5" fill="rgba(255,255,255,0.10)"/>
+      <rect width="80" height="3" rx="1.5" fill="oklch(0.78 0.18 160)"/>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="80" y="572" fill="#f4f1ff" opacity="0.42"
+        font-family="ui-sans-serif, system-ui, sans-serif" font-size="16">
+    github.com/KovalevAnton/llm-limits-tracker
+  </text>
+  <text x="80" y="596" fill="#f4f1ff" opacity="0.32"
+        font-family="ui-sans-serif, system-ui, sans-serif" font-size="14">
+    MIT · Node ≥ 18 · keys never leave your machine
+  </text>
+</svg>

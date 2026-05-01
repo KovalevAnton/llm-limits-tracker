@@ -1,0 +1,7 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <title>LLM Limits — dark variant</title>
+  <rect width="256" height="256" rx="56" fill="#1a1712"/>
+  <rect x="6" y="6" width="244" height="244" rx="50" fill="none" stroke="#322e29" stroke-width="1"/>
+  <path d="M82 70h22v94h60v22h-82z" fill="#d97757"/>
+  <rect x="172" y="172" width="14" height="14" rx="3" fill="#d97757" opacity="0.9"/>
+</svg>

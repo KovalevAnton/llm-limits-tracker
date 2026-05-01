@@ -39,7 +39,7 @@ Out of scope:
 
 - Vulnerabilities in upstream provider APIs (report those to the provider).
 - Issues that require an attacker to already have local code-execution on the user's machine.
-- DoS via running the server on a public interface (this tool is local-only by design).
+- DoS via running the server on a public interface. The proxy binds to `127.0.0.1` by default; the LAN-exposed mode (`HOST=0.0.0.0`) is opt-in and intended only for trusted local networks.
 
 ## Acknowledgements
 

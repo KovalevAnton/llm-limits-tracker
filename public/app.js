@@ -33,7 +33,6 @@ const T = {
     'settings.thresholds': 'Пороги алертов',
     'settings.thresholdsHelp': 'При каком % использования показывать предупреждение и алерт.',
     'settings.warnLabel': 'Предупреждение, %', 'settings.badLabel': 'Критическая отметка, %',
-    'settings.save': 'Сохранить', 'settings.saved': 'Настройки сохранены',
     'settings.getKey': 'получить ключ', 'settings.configured': 'настроен',
     'about.title': 'О приложении',
     'about.subtitle': 'Локальный дашборд лимитов вместо хождения по консолям.',
@@ -72,7 +71,6 @@ const T = {
     'settings.thresholds': 'Alert thresholds',
     'settings.thresholdsHelp': 'At what % of usage to show warning and critical alerts.',
     'settings.warnLabel': 'Warning, %', 'settings.badLabel': 'Critical, %',
-    'settings.save': 'Save', 'settings.saved': 'Settings saved',
     'settings.getKey': 'get key', 'settings.configured': 'configured',
     'about.title': 'About',
     'about.subtitle': 'Local dashboard of API limits — no jumping between provider consoles.',
@@ -111,7 +109,6 @@ const T = {
     'settings.thresholds': 'Umbrales de alerta',
     'settings.thresholdsHelp': 'A qué % de uso mostrar aviso y alerta crítica.',
     'settings.warnLabel': 'Aviso, %', 'settings.badLabel': 'Crítico, %',
-    'settings.save': 'Guardar', 'settings.saved': 'Ajustes guardados',
     'settings.getKey': 'obtener clave', 'settings.configured': 'configurado',
     'about.title': 'Acerca de',
     'about.subtitle': 'Panel local de límites — sin saltar entre consolas de proveedores.',
@@ -124,6 +121,44 @@ const T = {
     'gemini.note200': 'API accesible. Los límites exactos no se publican — vigilamos los 429.',
     'gemini.note429': 'Cuota superada (429).', 'gemini.noteAuth': 'Clave inválida o sin permisos.', 'gemini.noteOther': 'Estado {status}',
     'reset.window': 'ventana 1 min',
+  },
+  ja: {
+    'nav.dashboard': 'ダッシュボード', 'nav.settings': '設定', 'nav.about': 'このアプリについて',
+    'dashboard.title': 'プロバイダー別レート制限',
+    'dashboard.subtitle': '8 つのコンソールを巡る代わりに一目で。キーはブラウザにのみ保存され、プロキシはプローブを中継するだけです。',
+    'toolbar.refresh': 'すべて更新', 'toolbar.refreshing': '更新中…',
+    'toolbar.autoOn': '自動 · オン', 'toolbar.autoOff': '自動 · オフ',
+    'toolbar.lastChecked': '{time} に更新', 'toolbar.never': '未更新',
+    'health.healthy': '正常', 'health.warn': '接近', 'health.bad': '上限間近', 'health.idle': '未設定',
+    'card.notConfigured': '未設定', 'card.waiting': '待機中',
+    'card.empty': '追跡を開始するには、設定で API キーを追加してください。',
+    'card.refreshFirst': '「すべて更新」を押して制限を取得します。',
+    'card.statusOk': 'OK', 'card.statusWarn': '接近', 'card.statusBad': '上限間近',
+    'card.statusError': 'エラー', 'card.statusAuth': '認証', 'card.statusHttp': 'HTTP {status}',
+    'card.openSettings': '設定を開く',
+    'alert.providerError': 'HTTP {status} — キーまたはクォータを確認してください。',
+    'alert.atPct': '{label} {pct}%',
+    'empty.heroTitle': 'キーを追加すると制限が見えます',
+    'empty.heroBody': '対応する 8 つのプロバイダーの API キーを接続して、すべての rate limit を一箇所で追跡。登録不要、サーバー側に何も保存しません。',
+    'empty.heroCta': '設定を開く',
+    'settings.title': '設定',
+    'settings.subtitle': 'キーはブラウザのローカル (localStorage) にのみ保存されます。サーバーは保存しません。',
+    'settings.show': '表示', 'settings.hide': '隠す',
+    'settings.thresholds': 'アラートしきい値',
+    'settings.thresholdsHelp': '使用率が何 % で警告と重大アラートを出すか。',
+    'settings.warnLabel': '警告 %', 'settings.badLabel': '重大 %',
+    'settings.getKey': 'キーを取得', 'settings.configured': '設定済み',
+    'about.title': 'このアプリについて',
+    'about.subtitle': '各プロバイダーのコンソールを行き来せずに済むローカル制限ダッシュボード。',
+    'about.intro': 'このスタンドアロンアプリは小さなリクエストでプロバイダー API をプローブし、<strong>rate-limit ヘッダー</strong>または専用エンドポイント（OpenRouter の <code>/api/v1/auth/key</code>）を読み取ります：',
+    'about.bulletAnthropic': '<strong>Anthropic</strong> — <code>anthropic-ratelimit-*</code>（RPM + 入力/出力 TPM）。',
+    'about.bulletOpenAICompat': '<strong>OpenAI / Groq / Fireworks / Mistral / Together</strong> — <code>x-ratelimit-*</code>（RPM + TPM）。',
+    'about.bulletOpenRouter': '<strong>OpenRouter</strong> — <code>/api/v1/auth/key</code> からクレジット残高と rate limit。',
+    'about.bulletGemini': '<strong>Gemini</strong> — rate-limit ヘッダーは無し；ステータスは 200/429 から判定。',
+    'about.subsNote': 'サブスクリプション制限（Claude Pro/Max、ChatGPT Plus/Pro、Gemini Advanced）は API では公開されていません — UI 内部の指標です。ここでは <em>API アカウント</em> の制限を表示しています。',
+    'gemini.note200': 'API 利用可能。正確な制限は非公開のため、429 を監視します。',
+    'gemini.note429': 'クォータ超過 (429)。', 'gemini.noteAuth': 'キーが無効、または権限がありません。', 'gemini.noteOther': 'ステータス {status}',
+    'reset.window': '1 分ウィンドウ',
   },
   zh: {
     'nav.dashboard': '仪表板', 'nav.settings': '设置', 'nav.about': '关于',
@@ -150,7 +185,6 @@ const T = {
     'settings.thresholds': '告警阈值',
     'settings.thresholdsHelp': '在使用率达到多少 % 时显示警告与严重告警。',
     'settings.warnLabel': '警告，%', 'settings.badLabel': '严重，%',
-    'settings.save': '保存', 'settings.saved': '设置已保存',
     'settings.getKey': '获取密钥', 'settings.configured': '已配置',
     'about.title': '关于',
     'about.subtitle': '本地限额仪表板 — 不再在各家控制台间切换。',
@@ -176,6 +210,7 @@ function detectLang() {
   if (n.startsWith('ru')) return 'ru';
   if (n.startsWith('es')) return 'es';
   if (n.startsWith('zh')) return 'zh';
+  if (n.startsWith('ja')) return 'ja';
   return 'en';
 }
 let currentLang = localStorage.getItem(LANG_KEY) || detectLang();
@@ -291,13 +326,6 @@ function applyAllStrings() {
 
 function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-function flash(msg) {
-  const el = document.createElement('div');
-  el.className = 'toast'; el.textContent = msg;
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1800);
 }
 
 // ===== Probe =====
@@ -424,6 +452,7 @@ function renderSettings() {
     en: { anthropic: 'Standard <code>sk-ant-...</code> gives rate limits. Admin key unlocks cost report.', openai: 'Standard API key. Org admin key needed for cost report.', gemini: 'From Google AI Studio. Gemini does not expose rate-limit headers.', openrouter: 'Shows credit balance and rate limit (requests / interval).', groq: 'OpenAI-compatible API.', fireworks: 'OpenAI-compatible API.', mistral: 'OpenAI-compatible API.', together: 'OpenAI-compatible API.' },
     es: { anthropic: 'Clave estándar <code>sk-ant-...</code> da rate limits. Admin desbloquea costes.', openai: 'Clave estándar. Para costes hace falta clave admin de la organización.', gemini: 'Desde Google AI Studio. Gemini no expone cabeceras rate-limit.', openrouter: 'Muestra balance de créditos y rate limit (peticiones / intervalo).', groq: 'API compatible con OpenAI.', fireworks: 'API compatible con OpenAI.', mistral: 'API compatible con OpenAI.', together: 'API compatible con OpenAI.' },
     zh: { anthropic: '普通 <code>sk-ant-...</code> 提供限额，Admin 密钥提供费用报告。', openai: '普通 API 密钥；组织 Admin 密钥用于费用报告。', gemini: '来自 Google AI Studio。Gemini 不暴露 rate-limit 响应头。', openrouter: '显示额度余额和 rate limit（每段时间请求数）。', groq: 'OpenAI 兼容 API。', fireworks: 'OpenAI 兼容 API。', mistral: 'OpenAI 兼容 API。', together: 'OpenAI 兼容 API。' },
+    ja: { anthropic: '通常の <code>sk-ant-...</code> でレート制限を取得。Admin キーで費用レポート。', openai: '通常の API キー。費用レポートには組織 Admin キーが必要。', gemini: 'Google AI Studio から取得。Gemini は rate-limit ヘッダーを返しません。', openrouter: 'クレジット残高と rate limit（リクエスト数 / 間隔）を表示。', groq: 'OpenAI 互換 API。', fireworks: 'OpenAI 互換 API。', mistral: 'OpenAI 互換 API。', together: 'OpenAI 互換 API。' },
   };
   const localHelp = help[currentLang] || help.en;
   const cardsHtml = PROVIDERS.map((p, i) => `
@@ -451,16 +480,55 @@ function renderSettings() {
       btn.textContent = showing ? t('settings.show') : t('settings.hide');
     });
   });
+  // Auto-save key on blur (change). Updates state, refreshes the dashboard,
+  // and probes immediately when a brand-new key appears so the user doesn't
+  // have to click "Refresh all". Doesn't re-render the settings grid (would
+  // steal focus from the next input); the configured tag is patched inline.
+  document.querySelectorAll('input[data-key]').forEach((el) => {
+    el.addEventListener('change', async () => {
+      const id = el.dataset.key;
+      const oldVal = state.keys[id] || '';
+      const newVal = el.value.trim();
+      if (oldVal === newVal) return;
+      state.keys[id] = newVal;
+      saveState();
+      if (!newVal) state.lastResults[id] = null;
+      // Patch the configured tag inline (no re-render) so focus stays on
+      // whichever input the user is about to fill next.
+      const headDiv = el.closest('.card').querySelector('.c-head');
+      const existingTag = headDiv.querySelector('.configured-tag');
+      if (newVal && !existingTag) {
+        const tag = document.createElement('span');
+        tag.className = 'configured-tag';
+        tag.textContent = t('settings.configured');
+        headDiv.appendChild(tag);
+      } else if (!newVal && existingTag) {
+        existingTag.remove();
+      }
+      renderProviders();
+      // Auto-probe only when a key is freshly added (not on edits / removals).
+      if (!oldVal && newVal) {
+        const r = await probe(id);
+        if (r && r.error === 'no_key') return;
+        const prov = PROVIDERS.find((p) => p.id === id);
+        state.lastResults[id] = PARSERS[prov.parser](r);
+        state.lastChecked = Date.now();
+        renderProviders();
+        firePulse();
+      }
+    });
+  });
 }
 
-document.getElementById('save-settings').addEventListener('click', () => {
-  document.querySelectorAll('input[data-key]').forEach((el) => { state.keys[el.dataset.key] = el.value.trim(); });
-  state.thresholds.warn = Number(document.getElementById('threshold-warn').value) || 80;
-  state.thresholds.bad = Number(document.getElementById('threshold-bad').value) || 95;
-  saveState();
-  renderProviders();
-  renderSettings();
-  flash(t('settings.saved'));
+// Threshold inputs: persist on change, redraw the dashboard so colour/severity
+// thresholds update live. Attached once — the DOM nodes live in static HTML.
+['threshold-warn', 'threshold-bad'].forEach((id) => {
+  document.getElementById(id).addEventListener('change', () => {
+    state.thresholds.warn = Number(document.getElementById('threshold-warn').value) || 80;
+    state.thresholds.bad = Number(document.getElementById('threshold-bad').value) || 95;
+    saveState();
+    renderProviders();
+  });
 });
 
 // ===== Card / dashboard rendering =====
@@ -496,7 +564,6 @@ function renderProvider(p, idx) {
   const sev = cardSeverity(p);
   const cardClasses = ['card'];
   if (sev === 'warn' || sev === 'bad') cardClasses.push(sev);
-  const stripeHtml = (sev === 'warn' || sev === 'bad') ? '<span class="stripe"></span>' : '';
 
   let pillClass = 'pill';
   let pillText = '';
@@ -550,7 +617,6 @@ function renderProvider(p, idx) {
 
   return `
     <div class="${cardClasses.join(' ')}" data-provider="${p.id}" style="animation-delay: ${idx * 30}ms">
-      ${stripeHtml}
       <div class="c-head">
         <div class="c-prov">${escapeHtml(p.name)}<small>${escapeHtml(p.subtitle)}</small></div>
         <span class="${pillClass}">${escapeHtml(pillText)}</span>

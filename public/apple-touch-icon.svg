@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- iOS automatically rounds the corners on home-screen install, but we round
+       slightly so it looks right when used as-is on Android / desktop too. -->
+  <rect width="180" height="180" rx="40" fill="#06070d"/>
+  <path d="M58 50h15v66h42v15H58z" fill="#fff"/>
+  <rect x="120" y="120" width="10" height="10" rx="2" fill="#fff" opacity="0.92"/>
+</svg>

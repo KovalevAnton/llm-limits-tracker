@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for considering a contribution. The codebase is small on purpose — under 500 lines split across `server.js` and `public/index.html` — so the bar for "I get how this works" is low.
+Thanks for considering a contribution. The codebase is small on purpose — about 1.7k lines split across `server.js` and three short files in `public/`, with no build step — so the bar for "I get how this works" is low.
 
 ## Development setup
 
@@ -11,14 +11,18 @@ node server.js
 # open http://localhost:5173
 ```
 
-That's it. No build step, no bundler, no package manager. If you change `server.js` restart Node; if you change `index.html` reload the browser.
+That's it. No build step, no bundler, no package manager. If you change `server.js` restart Node; if you change anything in `public/` reload the browser.
+
+By default the server binds to `127.0.0.1`. If you need it reachable on your LAN (testing on a phone on the same Wi-Fi, etc.), run with `HOST=0.0.0.0 node server.js`.
 
 ## Project shape
 
-- **`server.js`** — single-file Node HTTP server. Two responsibilities: serve files from `public/` and proxy requests to provider APIs (so the browser can read rate-limit headers without CORS errors). Provider definitions live in the `providers` registry near the top of the file.
-- **`public/index.html`** — single-page UI: dashboard, settings, alerts. State lives in `localStorage`. Provider definitions on the UI side live in the `PROVIDERS` array near the top of the `<script>` block.
+- **`server.js`** — single-file Node HTTP server. Two responsibilities: serve files from `public/` and proxy requests to provider APIs (so the browser can read rate-limit headers without CORS errors). Provider definitions live in the `providers` registry near the top; the five OpenAI-compatible providers share a single `openaiCompat()` helper.
+- **`public/index.html`** — markup only. A tiny inline boot script resolves the current theme before the stylesheet evaluates (avoids FOUC) and migrates legacy theme keys from older versions.
+- **`public/styles.css`** — three themes (Apple Glass light/dark and Hacker) plus shared layout. CSS variables on `:root` are overridden per `[data-theme="..."]`.
+- **`public/app.js`** — i18n strings (5 languages), the UI-side `PROVIDERS` array, parsers, settings auto-save, and rendering. State lives in `localStorage`.
 
-When you add a provider, edit both: the registry on the server and the registry in the UI.
+When you add a provider, edit both: the registry on the server and the `PROVIDERS` array in `public/app.js`.
 
 ## Code style
 
@@ -37,7 +41,7 @@ If you'd like to ship something but don't know where to start:
 7. **Browser extension companion** — scrape Claude.ai / chat.openai.com / gemini.google.com to surface the *subscription* limits that aren't exposed via API. This is the most-requested missing piece.
 8. **CLI mode** — `llm-limits status` prints all providers as a colored TUI table, no browser needed.
 9. **Per-project tagging** — let users add named "projects" and manually log which usage came from which app.
-10. **i18n** — UI strings are currently mixed Russian/English; pick a structure (probably an `i18n` object), translate to one or two more languages.
+10. **More languages** — the i18n table in `public/app.js` covers EN/RU/ES/ZH/JA. Adding a new language is a single object literal plus a button in the language pill (`public/index.html`) and a branch in `detectLang()`.
 
 ## Pull request guidelines
 

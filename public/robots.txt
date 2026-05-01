@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# This is a personal dashboard. There's nothing to scrape that won't 404 — keys
+# live in localStorage, probes need a server.js running locally. Indexing the
+# demo deploy is fine, that's the whole point.

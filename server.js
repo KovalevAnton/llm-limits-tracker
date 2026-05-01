@@ -24,12 +24,18 @@ const PORT = process.env.PORT ? Number(process.env.PORT) : 5173;
 const HOST = process.env.HOST || '127.0.0.1';
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
+// Single source of truth for the version: read it from package.json at boot
+// so we never have to remember to bump it in two places.
+const VERSION = require('./package.json').version;
+
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.svg': 'image/svg+xml',
   '.json': 'application/json; charset=utf-8',
+  '.webmanifest': 'application/manifest+json; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
   '.png': 'image/png',
   '.ico': 'image/x-icon',
 };
@@ -39,6 +45,23 @@ function send(res, status, body, headers = {}) {
   res.end(typeof body === 'string' ? body : JSON.stringify(body));
 }
 
+// Routes file 404s: HTML clients (browser navigations) get the styled
+// public/404.html; everything else (API consumers, /api/* paths, curl with
+// no Accept) gets the JSON envelope.
+function notFound(req, res, pathname) {
+  const accept = String(req.headers.accept || '');
+  const wantsHtml =
+    !pathname.startsWith('/api/') &&
+    accept.includes('text/html');
+  if (!wantsHtml) return send(res, 404, { error: 'not found', path: pathname });
+  fs.readFile(path.join(PUBLIC_DIR, '404.html'), (err, data) => {
+    if (err) return send(res, 404, { error: 'not found', path: pathname });
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    if (req.method === 'HEAD') return res.end();
+    res.end(data);
+  });
+}
+
 function serveStatic(req, res) {
   let pathname = decodeURIComponent(url.parse(req.url).pathname);
   if (pathname === '/') pathname = '/index.html';
@@ -46,9 +69,10 @@ function serveStatic(req, res) {
   if (!filePath.startsWith(PUBLIC_DIR)) return send(res, 403, { error: 'forbidden' });
 
   fs.readFile(filePath, (err, data) => {
-    if (err) return send(res, 404, { error: 'not found', path: pathname });
+    if (err) return notFound(req, res, pathname);
     const ext = path.extname(filePath).toLowerCase();
     res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    if (req.method === 'HEAD') return res.end();
     res.end(data);
   });
 }
@@ -203,12 +227,18 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  if (req.method === 'GET') return serveStatic(req, res);
+  // Tiny health/version endpoint. Cheap to add, useful for "what version is
+  // running on this port?" and as a smoke test during deploys.
+  if (req.method === 'GET' && url.parse(req.url).pathname === '/api/version') {
+    return send(res, 200, { name: 'llm-limits-tracker', version: VERSION });
+  }
+
+  if (req.method === 'GET' || req.method === 'HEAD') return serveStatic(req, res);
   send(res, 404, { error: 'not found' });
 });
 
 server.listen(PORT, HOST, () => {
   // eslint-disable-next-line no-console
   const shown = HOST === '0.0.0.0' || HOST === '::' ? 'localhost' : HOST;
-  console.log(`LLM Limits Tracker running at http://${shown}:${PORT}`);
+  console.log(`LLM Limits Tracker v${VERSION} running at http://${shown}:${PORT}`);
 });

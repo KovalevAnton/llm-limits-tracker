@@ -4,6 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LLM Limits</title>
+  <meta name="description" content="Local dashboard for LLM API rate limits across Claude, GPT, Gemini, OpenRouter, Groq, Fireworks, Mistral and Together. Zero dependencies." />
+  <meta name="theme-color" content="#dde4ee" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#06070d" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="LLM Limits" />
+  <meta property="og:description" content="Local dashboard for LLM API rate limits — 8 providers, 3 themes, 5 languages, zero dependencies." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="apple-touch-icon.svg" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <script>
     // Boot: resolve theme before stylesheet evaluates to avoid a flash of the
     // wrong palette. Migrates legacy theme keys (dark/light/glass/gpro/off)
@@ -37,18 +48,24 @@
       <div class="sb-brand-name">LLM&nbsp;Limits</div>
     </div>
     <nav class="sb-nav">
-      <button data-tab="dashboard" class="active" data-i18n="nav.dashboard"></button>
-      <button data-tab="settings" data-i18n="nav.settings"></button>
-      <button data-tab="about" data-i18n="nav.about"></button>
+      <button type="button" data-tab="dashboard" class="active" data-i18n="nav.dashboard"></button>
+      <button type="button" data-tab="settings" data-i18n="nav.settings"></button>
+      <button type="button" data-tab="about" data-i18n="nav.about"></button>
     </nav>
 
     <div class="sb-bottom">
-      <button type="button" id="aurora-toggle" class="aurora-toggle" aria-pressed="true" title="Background colors"><span class="swatch" aria-hidden="true"></span></button>
+      <div class="sb-row">
+        <button type="button" id="aurora-toggle" class="aurora-toggle" aria-pressed="true" title="Background colors"><span class="swatch" aria-hidden="true"></span></button>
+        <a id="github-link" class="github-link" href="https://github.com/KovalevAnton/llm-limits-tracker" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+      </div>
       <div class="lang-pill" id="lang-pills" role="tablist" aria-label="Language">
-        <button type="button" data-lang="ru">RU</button>
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="ru">RU</button>
         <button type="button" data-lang="zh">中</button>
+        <button type="button" data-lang="ja">日</button>
       </div>
       <div class="lang-pill" id="theme-pills" role="tablist" aria-label="Theme">
         <button type="button" data-theme-pick="system"      title="System">SYS</button>
@@ -96,9 +113,6 @@
             <input type="text" id="threshold-bad" value="95" />
           </div>
         </div>
-      </div>
-      <div style="margin-top: 24px;">
-        <button class="btn-primary" id="save-settings" type="button" data-i18n="settings.save"></button>
       </div>
     </section>
 

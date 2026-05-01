@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Not found · LLM Limits</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="theme-color" content="#f6f4ef" />
+<style>
+  :root {
+    --bg: #f6f4ef; --surface: #fff; --text: #1a1712;
+    --text-muted: rgba(26,23,18,.62); --text-faint: rgba(26,23,18,.42);
+    --accent: #c96442; --border: rgba(20,16,8,.10);
+    --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f; --surface: #1c1a16; --text: #ece7dc;
+      --text-muted: rgba(236,231,220,.62); --text-faint: rgba(236,231,220,.38);
+      --accent: #d97757; --border: rgba(255,251,240,.08);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    min-height: 100vh; display: grid; place-items: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 480px; padding: 48px 32px; text-align: center; }
+  .mark {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--accent); color: #fff;
+    display: inline-grid; place-items: center;
+    font: 700 22px/1 var(--sans); margin-bottom: 32px;
+  }
+  h1 { font: 500 36px/1.2 var(--serif); letter-spacing: -0.02em; margin: 0 0 8px; }
+  p { color: var(--text-muted); margin: 0 0 24px; }
+  code { background: rgba(0,0,0,.06); padding: 2px 6px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; }
+  @media (prefers-color-scheme: dark) { code { background: rgba(255,255,255,.06); } }
+  .actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  a {
+    display: inline-flex; align-items: center;
+    text-decoration: none; padding: 10px 16px; border-radius: 10px;
+    font-size: 14px; font-weight: 500;
+    transition: filter .15s, background-color .15s;
+  }
+  .primary { background: var(--accent); color: #fff; }
+  .primary:hover { filter: brightness(1.05); }
+  .ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+  .ghost:hover { color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark">L</div>
+    <h1>Page not found</h1>
+    <p>The link you followed doesn't go anywhere. The dashboard lives at <code>/</code>; for a no-keys preview try <code>/?demo</code>.</p>
+    <div class="actions">
+      <a class="primary" href="/">Open dashboard</a>
+      <a class="ghost" href="/?demo">Try the demo</a>
+    </div>
+  </div>
+</body>
+</html>

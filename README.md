@@ -6,13 +6,13 @@
 
 Stop opening eight different consoles. Run one command, see every quota in one screen.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Node](https://img.shields.io/badge/node-%3E%3D18-43853d.svg)
+[![npm](https://img.shields.io/npm/v/llm-limits-tracker.svg?color=c96442&label=npm)](https://www.npmjs.com/package/llm-limits-tracker)
+[![downloads](https://img.shields.io/npm/dm/llm-limits-tracker.svg?color=6b8a5a)](https://www.npmjs.com/package/llm-limits-tracker)
+[![license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Node](https://img.shields.io/badge/node-%E2%89%A518-43853d.svg)
 ![Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)
-![Status](https://img.shields.io/badge/status-v0.1-blue.svg)
 
-<!-- Replace with a real screenshot once recorded -->
-<!-- ![Screenshot](docs/screenshot.png) -->
+<img src="assets/hero.gif" width="900" alt="LLM Limits dashboard demo" />
 
 </div>
 
@@ -30,8 +30,42 @@ If you build with multiple LLMs, you already know the routine: production hits a
 - **Real rate-limit data** — read straight from the providers' response headers (RPM, TPM, input/output tokens)
 - **Threshold alerts** — warning at 80%, critical at 95% (configurable)
 - **Auto-refresh** — optional 60-second polling
-- **Local-only** — keys live in your browser's localStorage, the proxy runs on `localhost`
+- **Auto-save settings** — paste a key and it's saved + probed on the spot, no Save button
+- **Three themes** — Apple Glass (light & dark) and a green-on-black Hacker mode
+- **Five languages** — English, Русский, Español, 中文, 日本語
+- **Local-only by default** — server binds to `127.0.0.1`; keys live in browser `localStorage`
 - **Zero dependencies** — pure Node.js, no `npm install`, single binary you can read in 5 minutes
+
+## Themes
+
+<table>
+<tr>
+<td><img src="assets/themes/screenshot1.png" alt="Glass Light theme" /></td>
+<td><img src="assets/themes/screenshot2.png" alt="Glass Dark theme" /></td>
+<td><img src="assets/themes/screenshot3.png" alt="Hacker theme" /></td>
+</tr>
+<tr>
+<td align="center"><sub><b>Glass Light</b> · warm cream, refined</sub></td>
+<td align="center"><sub><b>Glass Dark</b> · warm dark, restrained</sub></td>
+<td align="center"><sub><b>Hacker</b> · CRT terminal, ASCII bars</sub></td>
+</tr>
+</table>
+
+<details>
+<summary>More views</summary>
+
+<table>
+<tr>
+<td><img src="assets/themes/screenshot4.png" alt="Settings page" /></td>
+<td><img src="assets/themes/screenshot5.png" alt="Empty state" /></td>
+</tr>
+<tr>
+<td align="center"><sub>Settings</sub></td>
+<td align="center"><sub>First-run empty state</sub></td>
+</tr>
+</table>
+
+</details>
 
 ## Quickstart
 
@@ -41,13 +75,15 @@ cd llm-limits-tracker
 node server.js
 ```
 
-Open http://localhost:5173, drop your API keys into Settings, hit "Обновить все".
+Open http://localhost:5173 and paste any provider's API key into **Settings** — the dashboard probes it immediately, no Save button, no Refresh.
 
-Or, once published to npm:
+Or via npm:
 
 ```bash
 npx llm-limits-tracker
 ```
+
+To expose it on your LAN (e.g. for a TV dashboard), set `HOST=0.0.0.0`. The default `127.0.0.1` binding matches the local-only threat model in [SECURITY.md](SECURITY.md).
 
 ## What you get per provider
 
@@ -107,18 +143,23 @@ See `CONTRIBUTING.md` for "good first issues".
 
 ```
 llm-limits-tracker/
-├── server.js          # Proxy + static server, zero deps
+├── server.js              # Proxy + static server, zero deps (~210 lines)
 ├── public/
-│   └── index.html     # Single-page UI (vanilla JS)
+│   ├── index.html         # Markup only (~115 lines)
+│   ├── styles.css         # Three themes, no preprocessor
+│   └── app.js             # i18n, providers, parsers, render — vanilla JS
+├── docs/                  # Internal notes, launch material (not published to npm)
 ├── package.json
-├── LICENSE            # MIT
+├── LICENSE                # MIT
+├── CHANGELOG.md
+├── SECURITY.md
 ├── CONTRIBUTING.md
 └── README.md
 ```
 
 ## Contributing
 
-PRs welcome. The codebase is intentionally small (under 500 lines total) so contribution friction stays low. See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and ideas for first contributions.
+PRs welcome. The codebase is intentionally small — three short files in `public/` and one in `server.js`, no build step — so contribution friction stays low. See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and ideas for first contributions.
 
 ## License
 

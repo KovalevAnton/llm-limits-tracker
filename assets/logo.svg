@@ -1,0 +1,14 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <title>LLM Limits</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d97757"/>
+      <stop offset="100%" stop-color="#c25837"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+  <!-- "L" letter -->
+  <path d="M82 70h22v94h60v22h-82z" fill="#fff"/>
+  <!-- subtle progress-bar accent at bottom — small visual hint at the product -->
+  <rect x="172" y="172" width="14" height="14" rx="3" fill="#fff" opacity="0.92"/>
+</svg>
