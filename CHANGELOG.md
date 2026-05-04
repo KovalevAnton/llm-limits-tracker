@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Slack and Discord webhook alerts.** Paste a webhook URL into Settings and the dashboard will ping it whenever a metric crosses the warning or critical threshold. Alerts fire only on upward severity transitions (ok → warn, ok → bad, warn → bad) — no spam on every refresh. A "Test" button next to each input fires a synthetic alert so you can verify the URL works.
+- New server endpoint `POST /api/webhook/notify` — relays the alert to Slack/Discord because browsers can't POST to `hooks.slack.com` directly (CORS). Allowlist of upstream hosts: only `hooks.slack.com` and the Discord webhook hosts.
+- Per-format payloads: Slack gets a `blocks` payload with mrkdwn; Discord gets an `embeds` payload with severity-coloured sidebar.
+- **DeepSeek** added with a smart probe — instead of `/chat/completions` (which returns no useful headers), we hit `/user/balance` and surface the actual USD/CNY balance.
+- Settings page split into two top-level sections: **Providers** (API keys) and **Alerts** (thresholds + Slack/Discord webhooks). Sidebar is now Dashboard / Providers / Alerts / About.
+
+### Changed
+- Provider roster trimmed to **6 cards that all show real numbers** (Anthropic / OpenAI / Groq / OpenRouter / DeepSeek with metrics + Gemini as health-check). Each provider now earns its place — no more `OK · —` empty cards.
+- OpenRouter free-tier `rate_limit.requests = -1` no longer renders as `-1 req / 10s`; the line is omitted, only "free tier" stays in the footer.
+- Gemini cards now use a proper info-state (small accent dot + the note + footer with timestamp) instead of an italic idle-style message.
+
+### Removed
+- Together AI, Fireworks AI, Mistral, Moonshot/Kimi, Qwen (Alibaba), Zhipu/GLM, MiniMax. Reasons: most returned no useful rate-limit data; Moonshot and Zhipu also required a Chinese phone number to register. Qwen models remain accessible via OpenRouter for those who want them.
+
 ## [0.2.1] - 2026-05-01
 
 ### Added

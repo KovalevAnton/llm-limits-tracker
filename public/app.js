@@ -9,7 +9,11 @@
 // ===== i18n =====
 const T = {
   ru: {
-    'nav.dashboard': 'Дашборд', 'nav.settings': 'Настройки', 'nav.about': 'О приложении',
+    'nav.dashboard': 'Дашборд', 'nav.providers': 'Провайдеры', 'nav.alerts': 'Алерты', 'nav.about': 'О приложении',
+    'providers.title': 'Провайдеры',
+    'providers.subtitle': 'Восемь LLM API в одном дашборде. Ключи хранятся локально в браузере; сервер их не сохраняет.',
+    'alerts.title': 'Алерты',
+    'alerts.subtitle': 'Когда и куда сообщать что лимиты подходят к концу.',
     'dashboard.title': 'Лимиты по провайдерам',
     'dashboard.subtitle': 'Один взгляд вместо восьми консолей. Ключи живут только в браузере; прокси нужен лишь для самого запроса.',
     'toolbar.refresh': 'Обновить все', 'toolbar.refreshing': 'Обновляем…',
@@ -32,6 +36,16 @@ const T = {
     'settings.show': 'Показать', 'settings.hide': 'Скрыть',
     'settings.thresholds': 'Пороги алертов',
     'settings.thresholdsHelp': 'При каком % использования показывать предупреждение и алерт.',
+    'notifications.title': 'Уведомления',
+    'notifications.help': 'Получайте алерты в Slack или Discord, когда метрика пересекает порог. Webhook URL хранится только в браузере; сервер пересылает запрос, но не сохраняет.',
+    'notifications.slackLabel': 'Slack webhook URL',
+    'notifications.discordLabel': 'Discord webhook URL',
+    'notifications.test': 'Проверить',
+    'notifications.testLabel': 'Тест-алерт',
+    'notifications.sending': 'Отправляем…',
+    'notifications.testSent': 'Тест-алерт отправлен',
+    'notifications.testFailed': 'Не удалось отправить — проверьте URL',
+    'notifications.noUrl': 'Сначала введите URL',
     'settings.warnLabel': 'Предупреждение, %', 'settings.badLabel': 'Критическая отметка, %',
     'settings.getKey': 'получить ключ', 'settings.configured': 'настроен',
     'about.title': 'О приложении',
@@ -43,11 +57,17 @@ const T = {
     'about.bulletGemini': '<strong>Gemini</strong> — заголовки rate-limit не отдаются; статус по 200/429.',
     'about.subsNote': 'Лимиты <em>подписок</em> (Claude Pro/Max, ChatGPT Plus/Pro, Gemini Advanced) у API недоступны — это закрытые UI-метрики. Здесь видны лимиты вашего <em>API-аккаунта</em>.',
     'gemini.note200': 'API доступен. Точные лимиты не публикуются — следим за 429.',
+    'deepseek.balanceLabel': 'Баланс',
+    'deepseek.insufficient': 'Недостаточно средств — пополните баланс на platform.deepseek.com',
     'gemini.note429': 'Превышена квота (429).', 'gemini.noteAuth': 'Ключ невалиден или не имеет прав.', 'gemini.noteOther': 'Статус {status}',
     'reset.window': 'окно 1 мин',
   },
   en: {
-    'nav.dashboard': 'Dashboard', 'nav.settings': 'Settings', 'nav.about': 'About',
+    'nav.dashboard': 'Dashboard', 'nav.providers': 'Providers', 'nav.alerts': 'Alerts', 'nav.about': 'About',
+    'providers.title': 'Providers',
+    'providers.subtitle': 'Eight LLM APIs in one dashboard. Keys live locally in your browser; the server never stores them.',
+    'alerts.title': 'Alerts',
+    'alerts.subtitle': 'When and where to notify you that limits are filling up.',
     'dashboard.title': 'Limits by provider',
     'dashboard.subtitle': "One glance instead of eight consoles. Keys live only in your browser; the proxy only relays the probe.",
     'toolbar.refresh': 'Refresh all', 'toolbar.refreshing': 'Refreshing…',
@@ -70,6 +90,16 @@ const T = {
     'settings.show': 'Show', 'settings.hide': 'Hide',
     'settings.thresholds': 'Alert thresholds',
     'settings.thresholdsHelp': 'At what % of usage to show warning and critical alerts.',
+    'notifications.title': 'Notifications',
+    'notifications.help': 'Get alerts on Slack or Discord when a metric crosses a threshold. The webhook URL stays in your browser; the server only relays, never persists.',
+    'notifications.slackLabel': 'Slack webhook URL',
+    'notifications.discordLabel': 'Discord webhook URL',
+    'notifications.test': 'Test',
+    'notifications.testLabel': 'Test alert',
+    'notifications.sending': 'Sending…',
+    'notifications.testSent': 'Test alert sent',
+    'notifications.testFailed': 'Failed to send — check the URL',
+    'notifications.noUrl': 'Enter a URL first',
     'settings.warnLabel': 'Warning, %', 'settings.badLabel': 'Critical, %',
     'settings.getKey': 'get key', 'settings.configured': 'configured',
     'about.title': 'About',
@@ -81,11 +111,17 @@ const T = {
     'about.bulletGemini': "<strong>Gemini</strong> — no rate-limit headers; status read from 200/429.",
     'about.subsNote': "Subscription limits (Claude Pro/Max, ChatGPT Plus/Pro, Gemini Advanced) aren't exposed via API — they're closed UI metrics. This shows limits of your <em>API account</em>.",
     'gemini.note200': "API reachable. Exact limits aren't published — we watch for 429s.",
+    'deepseek.balanceLabel': 'Balance',
+    'deepseek.insufficient': 'Insufficient balance — top up at platform.deepseek.com',
     'gemini.note429': 'Quota exceeded (429).', 'gemini.noteAuth': 'Key invalid or unauthorized.', 'gemini.noteOther': 'Status {status}',
     'reset.window': '1 min window',
   },
   es: {
-    'nav.dashboard': 'Panel', 'nav.settings': 'Ajustes', 'nav.about': 'Acerca de',
+    'nav.dashboard': 'Panel', 'nav.providers': 'Proveedores', 'nav.alerts': 'Alertas', 'nav.about': 'Acerca de',
+    'providers.title': 'Proveedores',
+    'providers.subtitle': 'Ocho APIs LLM en un solo panel. Las claves se guardan localmente en tu navegador; el servidor no las almacena.',
+    'alerts.title': 'Alertas',
+    'alerts.subtitle': 'Cuándo y dónde avisarte que los límites se están agotando.',
     'dashboard.title': 'Límites por proveedor',
     'dashboard.subtitle': 'Una vista en lugar de ocho consolas. Las claves viven solo en tu navegador; el proxy solo reenvía la prueba.',
     'toolbar.refresh': 'Actualizar todo', 'toolbar.refreshing': 'Actualizando…',
@@ -108,6 +144,16 @@ const T = {
     'settings.show': 'Mostrar', 'settings.hide': 'Ocultar',
     'settings.thresholds': 'Umbrales de alerta',
     'settings.thresholdsHelp': 'A qué % de uso mostrar aviso y alerta crítica.',
+    'notifications.title': 'Notificaciones',
+    'notifications.help': 'Recibe alertas en Slack o Discord cuando una métrica cruce un umbral. La URL del webhook solo vive en tu navegador; el servidor solo la reenvía, nunca la guarda.',
+    'notifications.slackLabel': 'URL del webhook de Slack',
+    'notifications.discordLabel': 'URL del webhook de Discord',
+    'notifications.test': 'Probar',
+    'notifications.testLabel': 'Alerta de prueba',
+    'notifications.sending': 'Enviando…',
+    'notifications.testSent': 'Alerta de prueba enviada',
+    'notifications.testFailed': 'No se pudo enviar — revisa la URL',
+    'notifications.noUrl': 'Introduce una URL primero',
     'settings.warnLabel': 'Aviso, %', 'settings.badLabel': 'Crítico, %',
     'settings.getKey': 'obtener clave', 'settings.configured': 'configurado',
     'about.title': 'Acerca de',
@@ -119,11 +165,17 @@ const T = {
     'about.bulletGemini': '<strong>Gemini</strong> — sin cabeceras rate-limit; estado por 200/429.',
     'about.subsNote': 'Los límites de suscripción (Claude Pro/Max, ChatGPT Plus/Pro, Gemini Advanced) no están expuestos vía API — son métricas internas de la UI. Aquí ves los límites de tu <em>cuenta de API</em>.',
     'gemini.note200': 'API accesible. Los límites exactos no se publican — vigilamos los 429.',
+    'deepseek.balanceLabel': 'Saldo',
+    'deepseek.insufficient': 'Saldo insuficiente — recarga en platform.deepseek.com',
     'gemini.note429': 'Cuota superada (429).', 'gemini.noteAuth': 'Clave inválida o sin permisos.', 'gemini.noteOther': 'Estado {status}',
     'reset.window': 'ventana 1 min',
   },
   ja: {
-    'nav.dashboard': 'ダッシュボード', 'nav.settings': '設定', 'nav.about': 'このアプリについて',
+    'nav.dashboard': 'ダッシュボード', 'nav.providers': 'プロバイダー', 'nav.alerts': 'アラート', 'nav.about': 'このアプリについて',
+    'providers.title': 'プロバイダー',
+    'providers.subtitle': '8 つの LLM API を 1 つのダッシュボードで。キーはブラウザのみに保存され、サーバーは保存しません。',
+    'alerts.title': 'アラート',
+    'alerts.subtitle': 'リミットが近づいたら、いつ・どこへ通知するか。',
     'dashboard.title': 'プロバイダー別レート制限',
     'dashboard.subtitle': '8 つのコンソールを巡る代わりに一目で。キーはブラウザにのみ保存され、プロキシはプローブを中継するだけです。',
     'toolbar.refresh': 'すべて更新', 'toolbar.refreshing': '更新中…',
@@ -146,6 +198,16 @@ const T = {
     'settings.show': '表示', 'settings.hide': '隠す',
     'settings.thresholds': 'アラートしきい値',
     'settings.thresholdsHelp': '使用率が何 % で警告と重大アラートを出すか。',
+    'notifications.title': '通知',
+    'notifications.help': 'メトリクスがしきい値を超えたら Slack や Discord に通知。Webhook URL はブラウザのみに保存され、サーバーは中継するだけで保存しません。',
+    'notifications.slackLabel': 'Slack Webhook URL',
+    'notifications.discordLabel': 'Discord Webhook URL',
+    'notifications.test': 'テスト',
+    'notifications.testLabel': 'テストアラート',
+    'notifications.sending': '送信中…',
+    'notifications.testSent': 'テストアラート送信済み',
+    'notifications.testFailed': '送信失敗 — URL を確認',
+    'notifications.noUrl': 'まず URL を入力',
     'settings.warnLabel': '警告 %', 'settings.badLabel': '重大 %',
     'settings.getKey': 'キーを取得', 'settings.configured': '設定済み',
     'about.title': 'このアプリについて',
@@ -157,11 +219,17 @@ const T = {
     'about.bulletGemini': '<strong>Gemini</strong> — rate-limit ヘッダーは無し；ステータスは 200/429 から判定。',
     'about.subsNote': 'サブスクリプション制限（Claude Pro/Max、ChatGPT Plus/Pro、Gemini Advanced）は API では公開されていません — UI 内部の指標です。ここでは <em>API アカウント</em> の制限を表示しています。',
     'gemini.note200': 'API 利用可能。正確な制限は非公開のため、429 を監視します。',
+    'deepseek.balanceLabel': '残高',
+    'deepseek.insufficient': '残高不足 — platform.deepseek.com でチャージしてください',
     'gemini.note429': 'クォータ超過 (429)。', 'gemini.noteAuth': 'キーが無効、または権限がありません。', 'gemini.noteOther': 'ステータス {status}',
     'reset.window': '1 分ウィンドウ',
   },
   zh: {
-    'nav.dashboard': '仪表板', 'nav.settings': '设置', 'nav.about': '关于',
+    'nav.dashboard': '仪表板', 'nav.providers': '提供商', 'nav.alerts': '告警', 'nav.about': '关于',
+    'providers.title': '提供商',
+    'providers.subtitle': '八个 LLM API 在一个仪表板里。密钥仅保存在浏览器本地，服务器不会存储。',
+    'alerts.title': '告警',
+    'alerts.subtitle': '何时、向何处通知你限额即将耗尽。',
     'dashboard.title': '各提供商限额',
     'dashboard.subtitle': '一屏胜过八个控制台。密钥仅保存在浏览器中，代理只在探测时使用。',
     'toolbar.refresh': '全部刷新', 'toolbar.refreshing': '刷新中…',
@@ -184,6 +252,16 @@ const T = {
     'settings.show': '显示', 'settings.hide': '隐藏',
     'settings.thresholds': '告警阈值',
     'settings.thresholdsHelp': '在使用率达到多少 % 时显示警告与严重告警。',
+    'notifications.title': '通知',
+    'notifications.help': '当指标越过阈值时，向 Slack 或 Discord 发送告警。Webhook URL 仅保存在浏览器；服务器只转发，不存储。',
+    'notifications.slackLabel': 'Slack Webhook URL',
+    'notifications.discordLabel': 'Discord Webhook URL',
+    'notifications.test': '测试',
+    'notifications.testLabel': '测试告警',
+    'notifications.sending': '发送中…',
+    'notifications.testSent': '测试告警已发送',
+    'notifications.testFailed': '发送失败 — 请检查 URL',
+    'notifications.noUrl': '请先输入 URL',
     'settings.warnLabel': '警告，%', 'settings.badLabel': '严重，%',
     'settings.getKey': '获取密钥', 'settings.configured': '已配置',
     'about.title': '关于',
@@ -195,6 +273,8 @@ const T = {
     'about.bulletGemini': '<strong>Gemini</strong> — 不返回 rate-limit 响应头；状态依据 200/429 判断。',
     'about.subsNote': '订阅类限额（Claude Pro/Max、ChatGPT Plus/Pro、Gemini Advanced）不通过 API 暴露——它们是封闭的 UI 指标。这里显示的是你的 <em>API 账户</em>限额。',
     'gemini.note200': 'API 可用。具体限额未公布 — 关注 429 错误。',
+    'deepseek.balanceLabel': '余额',
+    'deepseek.insufficient': '余额不足 — 请在 platform.deepseek.com 充值',
     'gemini.note429': '已超出配额 (429)。', 'gemini.noteAuth': '密钥无效或权限不足。', 'gemini.noteOther': '状态 {status}',
     'reset.window': '1 分钟窗口',
   },
@@ -222,14 +302,12 @@ function t(key, vars) {
 
 // ===== Provider registry — `name` + `subtitle` mirrors the card design. =====
 const PROVIDERS = [
-  { id: 'anthropic',  name: 'Anthropic',    subtitle: 'Claude API',         parser: 'anthropic',     placeholder: 'sk-ant-...',     getUrl: 'https://console.anthropic.com/settings/keys' },
-  { id: 'openai',     name: 'OpenAI',       subtitle: 'ChatGPT API',        parser: 'openai-compat', placeholder: 'sk-...',         getUrl: 'https://platform.openai.com/api-keys' },
-  { id: 'gemini',     name: 'Google',       subtitle: 'Gemini API',         parser: 'gemini',        placeholder: 'AIza...',        getUrl: 'https://aistudio.google.com/app/apikey' },
-  { id: 'openrouter', name: 'OpenRouter',   subtitle: 'Multi-provider',     parser: 'openrouter',    placeholder: 'sk-or-v1-...',   getUrl: 'https://openrouter.ai/keys' },
-  { id: 'groq',       name: 'Groq',         subtitle: 'Fast inference',     parser: 'openai-compat', placeholder: 'gsk_...',        getUrl: 'https://console.groq.com/keys' },
-  { id: 'fireworks',  name: 'Fireworks AI', subtitle: 'Inference platform', parser: 'openai-compat', placeholder: 'fw_...',         getUrl: 'https://fireworks.ai/account/api-keys' },
-  { id: 'mistral',    name: 'Mistral',      subtitle: 'Mistral API',        parser: 'openai-compat', placeholder: 'API key',        getUrl: 'https://console.mistral.ai/api-keys/' },
-  { id: 'together',   name: 'Together AI',  subtitle: 'Inference platform', parser: 'openai-compat', placeholder: 'API key',        getUrl: 'https://api.together.xyz/settings/api-keys' },
+  { id: 'anthropic',  name: 'Anthropic',  subtitle: 'Claude API',         parser: 'anthropic',     placeholder: 'sk-ant-...',   getUrl: 'https://console.anthropic.com/settings/keys' },
+  { id: 'openai',     name: 'OpenAI',     subtitle: 'ChatGPT API',        parser: 'openai-compat', placeholder: 'sk-...',       getUrl: 'https://platform.openai.com/api-keys' },
+  { id: 'gemini',     name: 'Google',     subtitle: 'Gemini API',         parser: 'gemini',        placeholder: 'AIza...',      getUrl: 'https://aistudio.google.com/app/apikey' },
+  { id: 'openrouter', name: 'OpenRouter', subtitle: 'Multi-provider',     parser: 'openrouter',    placeholder: 'sk-or-v1-...', getUrl: 'https://openrouter.ai/keys' },
+  { id: 'groq',       name: 'Groq',       subtitle: 'Fast inference',     parser: 'openai-compat', placeholder: 'gsk_...',      getUrl: 'https://console.groq.com/keys' },
+  { id: 'deepseek',   name: 'DeepSeek',   subtitle: 'deepseek-chat · R1', parser: 'deepseek',      placeholder: 'sk-...',       getUrl: 'https://platform.deepseek.com/api_keys' },
 ];
 
 const state = {
@@ -238,6 +316,12 @@ const state = {
   lastResults: Object.fromEntries(PROVIDERS.map((p) => [p.id, null])),
   lastChecked: null,
   autoRefresh: false,
+  // Outgoing webhook URLs (Slack / Discord). Empty string = disabled.
+  webhooks: { slack: '', discord: '' },
+  // Last severity per `${providerId}.${metricLabel}`. Used by checkAndNotify
+  // to fire a webhook ONLY on upward transitions (ok→warn, warn→bad, ok→bad)
+  // — re-firing on every refresh would spam the channel.
+  alertedState: {},
 };
 function loadState() {
   try {
@@ -246,10 +330,18 @@ function loadState() {
     if (saved.keys) Object.assign(state.keys, saved.keys);
     if (saved.thresholds) Object.assign(state.thresholds, saved.thresholds);
     if (typeof saved.autoRefresh === 'boolean') state.autoRefresh = saved.autoRefresh;
+    if (saved.webhooks) Object.assign(state.webhooks, saved.webhooks);
+    if (saved.alertedState && typeof saved.alertedState === 'object') state.alertedState = saved.alertedState;
   } catch (_) {}
 }
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ keys: state.keys, thresholds: state.thresholds, autoRefresh: state.autoRefresh }));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    keys: state.keys,
+    thresholds: state.thresholds,
+    autoRefresh: state.autoRefresh,
+    webhooks: state.webhooks,
+    alertedState: state.alertedState,
+  }));
 }
 
 // ===== Themes: system / glass-light / glass-dark / hacker =====
@@ -296,7 +388,7 @@ document.querySelectorAll('.sb-nav button').forEach((btn) => {
     document.querySelectorAll('.sb-nav button').forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
     const tab = btn.dataset.tab;
-    ['dashboard', 'settings', 'about'].forEach((tt) => {
+    ['dashboard', 'providers', 'alerts', 'about'].forEach((tt) => {
       document.getElementById(`tab-${tt}`).classList.toggle('hidden', tt !== tab);
     });
   });
@@ -401,14 +493,52 @@ function parseOpenRouter(result) {
   } else if (typeof data.usage === 'number') {
     metrics.push({ label: 'Credits used', used: data.usage, limit: 0, unit: 'credits', informational: true });
   }
+  // OpenRouter quirk: free-tier accounts return rate_limit.requests = -1
+  // ("no fixed limit"). Skip the rate-limit line entirely in that case so we
+  // don't render a literal "-1 req / 10s".
   let note = '';
-  if (data.rate_limit && data.rate_limit.requests && data.rate_limit.interval) {
-    note = `${data.rate_limit.requests} req / ${data.rate_limit.interval}`;
+  const rl = data.rate_limit;
+  if (rl && typeof rl.requests === 'number' && rl.requests > 0 && rl.interval) {
+    note = `${rl.requests} req / ${rl.interval}`;
   }
   if (data.is_free_tier) note = (note ? note + ' · ' : '') + 'free tier';
   return { metrics, errored: false, status: result.status, note, raw: result };
 }
-const PARSERS = { 'anthropic': parseAnthropic, 'openai-compat': parseOpenAICompat, 'gemini': parseGemini, 'openrouter': parseOpenRouter };
+// DeepSeek probes /user/balance instead of /chat/completions — the chat endpoint
+// doesn't return rate-limit headers, but balance gives us real, useful USD/CNY
+// numbers. is_available: false means "insufficient balance" → treat as error.
+function parseDeepSeek(result) {
+  if (!result || result.error) return { error: result && result.error, detail: result && result.detail };
+  if (result.status >= 400) return { metrics: [], errored: true, status: result.status, raw: result };
+  const data = result.body || {};
+  if (data.is_available === false) {
+    return { metrics: [], errored: true, status: 402, note: t('deepseek.insufficient'), raw: result };
+  }
+  const metrics = [];
+  if (Array.isArray(data.balance_infos)) {
+    data.balance_infos.forEach((info) => {
+      const balance = Number(info.total_balance);
+      if (!Number.isFinite(balance)) return;
+      const symbol = info.currency === 'USD' ? '$' : info.currency === 'CNY' ? '¥' : '';
+      const display = symbol ? `${symbol}${balance.toFixed(2)}` : `${balance.toFixed(2)} ${info.currency || ''}`;
+      metrics.push({
+        label: t('deepseek.balanceLabel'),
+        used: display,           // pre-formatted; fmtNum passes strings through
+        limit: 0,
+        informational: true,
+      });
+    });
+  }
+  return { metrics, errored: false, status: result.status, raw: result };
+}
+
+const PARSERS = {
+  'anthropic':     parseAnthropic,
+  'openai-compat': parseOpenAICompat,
+  'gemini':        parseGemini,
+  'openrouter':    parseOpenRouter,
+  'deepseek':      parseDeepSeek,
+};
 
 function pctClass(pct) {
   if (pct >= state.thresholds.bad) return 'bad';
@@ -448,11 +578,46 @@ function sortedProviders() {
 // ===== Settings =====
 function renderSettings() {
   const help = {
-    ru: { anthropic: 'Обычный <code>sk-ant-...</code> даёт rate limits. Admin-ключ — отчёт по расходам.', openai: 'Обычный API-ключ. Admin-ключ организации — для cost-отчёта.', gemini: 'Из Google AI Studio. Заголовков rate-limit у Gemini нет.', openrouter: 'Показывает баланс кредитов и rate limit (запросов / интервал).', groq: 'OpenAI-совместимый API.', fireworks: 'OpenAI-совместимый API.', mistral: 'OpenAI-совместимый API.', together: 'OpenAI-совместимый API.' },
-    en: { anthropic: 'Standard <code>sk-ant-...</code> gives rate limits. Admin key unlocks cost report.', openai: 'Standard API key. Org admin key needed for cost report.', gemini: 'From Google AI Studio. Gemini does not expose rate-limit headers.', openrouter: 'Shows credit balance and rate limit (requests / interval).', groq: 'OpenAI-compatible API.', fireworks: 'OpenAI-compatible API.', mistral: 'OpenAI-compatible API.', together: 'OpenAI-compatible API.' },
-    es: { anthropic: 'Clave estándar <code>sk-ant-...</code> da rate limits. Admin desbloquea costes.', openai: 'Clave estándar. Para costes hace falta clave admin de la organización.', gemini: 'Desde Google AI Studio. Gemini no expone cabeceras rate-limit.', openrouter: 'Muestra balance de créditos y rate limit (peticiones / intervalo).', groq: 'API compatible con OpenAI.', fireworks: 'API compatible con OpenAI.', mistral: 'API compatible con OpenAI.', together: 'API compatible con OpenAI.' },
-    zh: { anthropic: '普通 <code>sk-ant-...</code> 提供限额，Admin 密钥提供费用报告。', openai: '普通 API 密钥；组织 Admin 密钥用于费用报告。', gemini: '来自 Google AI Studio。Gemini 不暴露 rate-limit 响应头。', openrouter: '显示额度余额和 rate limit（每段时间请求数）。', groq: 'OpenAI 兼容 API。', fireworks: 'OpenAI 兼容 API。', mistral: 'OpenAI 兼容 API。', together: 'OpenAI 兼容 API。' },
-    ja: { anthropic: '通常の <code>sk-ant-...</code> でレート制限を取得。Admin キーで費用レポート。', openai: '通常の API キー。費用レポートには組織 Admin キーが必要。', gemini: 'Google AI Studio から取得。Gemini は rate-limit ヘッダーを返しません。', openrouter: 'クレジット残高と rate limit（リクエスト数 / 間隔）を表示。', groq: 'OpenAI 互換 API。', fireworks: 'OpenAI 互換 API。', mistral: 'OpenAI 互換 API。', together: 'OpenAI 互換 API。' },
+    ru: {
+      anthropic:  'Обычный <code>sk-ant-...</code> даёт rate limits. Admin-ключ — отчёт по расходам.',
+      openai:     'Обычный API-ключ. Admin-ключ организации — для cost-отчёта.',
+      gemini:     'Из Google AI Studio. Заголовков rate-limit у Gemini нет — следим по 429.',
+      openrouter: 'Показывает баланс кредитов и rate limit (запросов / интервал).',
+      groq:       'OpenAI-совместимый API.',
+      deepseek:   'Из platform.deepseek.com. Показываем актуальный USD/CNY-баланс через <code>/user/balance</code>.',
+    },
+    en: {
+      anthropic:  'Standard <code>sk-ant-...</code> gives rate limits. Admin key unlocks cost report.',
+      openai:     'Standard API key. Org admin key needed for cost report.',
+      gemini:     "From Google AI Studio. Gemini doesn't expose rate-limit headers — we watch for 429s.",
+      openrouter: 'Shows credit balance and rate limit (requests / interval).',
+      groq:       'OpenAI-compatible API.',
+      deepseek:   'From platform.deepseek.com. We poll <code>/user/balance</code> to show your live USD/CNY balance.',
+    },
+    es: {
+      anthropic:  'Clave estándar <code>sk-ant-...</code> da rate limits. Admin desbloquea costes.',
+      openai:     'Clave estándar. Para costes hace falta clave admin de la organización.',
+      gemini:     'Desde Google AI Studio. Gemini no expone cabeceras rate-limit — seguimos los 429.',
+      openrouter: 'Muestra balance de créditos y rate limit (peticiones / intervalo).',
+      groq:       'API compatible con OpenAI.',
+      deepseek:   'De platform.deepseek.com. Consultamos <code>/user/balance</code> para mostrar tu saldo USD/CNY en vivo.',
+    },
+    zh: {
+      anthropic:  '普通 <code>sk-ant-...</code> 提供限额，Admin 密钥提供费用报告。',
+      openai:     '普通 API 密钥；组织 Admin 密钥用于费用报告。',
+      gemini:     '来自 Google AI Studio。Gemini 不暴露 rate-limit 响应头 — 通过 429 监测。',
+      openrouter: '显示额度余额和 rate limit（每段时间请求数）。',
+      groq:       'OpenAI 兼容 API。',
+      deepseek:   '来自 platform.deepseek.com。通过 <code>/user/balance</code> 显示当前 USD/CNY 余额。',
+    },
+    ja: {
+      anthropic:  '通常の <code>sk-ant-...</code> でレート制限を取得。Admin キーで費用レポート。',
+      openai:     '通常の API キー。費用レポートには組織 Admin キーが必要。',
+      gemini:     'Google AI Studio から取得。Gemini は rate-limit ヘッダーを返さないため、429 を監視。',
+      openrouter: 'クレジット残高と rate limit（リクエスト数 / 間隔）を表示。',
+      groq:       'OpenAI 互換 API。',
+      deepseek:   'platform.deepseek.com から。<code>/user/balance</code> で USD/CNY 残高を表示。',
+    },
   };
   const localHelp = help[currentLang] || help.en;
   const cardsHtml = PROVIDERS.map((p, i) => `
@@ -531,6 +696,40 @@ function renderSettings() {
   });
 });
 
+// Webhook URL inputs — auto-save on blur, no Save button.
+['slack', 'discord'].forEach((kind) => {
+  const input = document.getElementById(`webhook-${kind}`);
+  if (!input) return;
+  input.value = state.webhooks[kind] || '';
+  input.addEventListener('change', () => {
+    state.webhooks[kind] = input.value.trim();
+    saveState();
+  });
+});
+
+// "Test" buttons next to each webhook input — fire a one-off synthetic alert
+// so the user can verify the URL works before relying on it.
+document.querySelectorAll('.test-webhook').forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    const kind = btn.dataset.target;
+    const url = (state.webhooks[kind] || '').trim();
+    if (!url) { flash(t('notifications.noUrl')); return; }
+    const fake = [{
+      provider: 'LLM Limits',
+      label: t('notifications.testLabel'),
+      used: 95, limit: 100, pct: 95, sev: 'bad',
+    }];
+    const payload = kind === 'slack' ? formatSlackPayload(fake) : formatDiscordPayload(fake);
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = t('notifications.sending');
+    const ok = await sendWebhook(url, payload);
+    btn.textContent = orig;
+    btn.disabled = false;
+    flash(t(ok ? 'notifications.testSent' : 'notifications.testFailed'));
+  });
+});
+
 // ===== Card / dashboard rendering =====
 function renderMetric(m, hero) {
   if (m.informational) {
@@ -556,6 +755,30 @@ function renderMetric(m, hero) {
       </div>
       <div class="bar ${cls}"><i class="${cls}" style="width: ${barPct}%"></i></div>
     </div>`;
+}
+
+// Pull a clean human-readable line out of an upstream error response. Provider
+// error bodies are often huge (Gemini's 429 dumps whole docs URLs and quota
+// metric paths). We extract the gist: status code, retry-in if available, and
+// a truncated message — anything more belongs in the network tab, not the UI.
+function formatUpstreamError(data, status) {
+  const body = data && data.raw && data.raw.body;
+  const err = body && body.error;
+  if (!err) return `Status ${status}`;
+
+  // Gemini-style retryDelay (e.g. "54s" buried in error.details[*].retryDelay).
+  let retry = '';
+  if (Array.isArray(err.details)) {
+    const ri = err.details.find((d) => d && (d.retryDelay || d['@type']?.includes('RetryInfo')));
+    if (ri && ri.retryDelay) retry = ` · retry in ${ri.retryDelay}`;
+  }
+
+  // First-sentence-only truncation. Gemini's message is paragraphs of text plus
+  // doc URLs; the first sentence carries the actual reason.
+  const raw = err.message || JSON.stringify(err);
+  const firstSentence = raw.split(/\.\s+/)[0].slice(0, 160);
+  const ellipsis = raw.length > firstSentence.length ? '…' : '';
+  return `${firstSentence}${ellipsis}${retry}`;
 }
 
 function renderProvider(p, idx) {
@@ -588,15 +811,15 @@ function renderProvider(p, idx) {
     const isAuth = status === 401 || status === 403;
     pillClass = 'pill bad';
     pillText = isAuth ? t('card.statusAuth') : t('card.statusHttp', { status });
-    const detail = data.raw && data.raw.body && data.raw.body.error
-      ? (data.raw.body.error.message || JSON.stringify(data.raw.body.error))
-      : `Status ${status}`;
-    body = `<div class="err-block">${escapeHtml(detail)}</div>`;
+    body = `<div class="err-block">${escapeHtml(formatUpstreamError(data, status))}</div>`;
   } else {
     if (sev === 'bad')      { pillClass = 'pill bad';  pillText = t('card.statusBad'); }
     else if (sev === 'warn') { pillClass = 'pill warn'; pillText = t('card.statusWarn'); }
     else                     { pillClass = 'pill';      pillText = t('card.statusOk'); }
 
+    const footLeft = state.lastChecked
+      ? new Date(state.lastChecked).toLocaleTimeString(currentLang === 'zh' ? 'zh-CN' : currentLang)
+      : '';
     if (data.metrics && data.metrics.length) {
       const sorted = [...data.metrics].sort((a, b) => {
         if (a.informational && !b.informational) return 1;
@@ -606,12 +829,13 @@ function renderProvider(p, idx) {
       });
       body = sorted.map((m, i) => renderMetric(m, i === 0)).join('');
       const footRight = data.note ? data.note : t('reset.window');
-      const footLeft  = state.lastChecked
-        ? new Date(state.lastChecked).toLocaleTimeString(currentLang === 'zh' ? 'zh-CN' : currentLang)
-        : '';
       foot = `<div class="c-foot"><span>${escapeHtml(footLeft)}</span><span class="right">${escapeHtml(footRight)}</span></div>`;
     } else {
-      body = `<div class="idle-msg">${escapeHtml(data.note || '—')}</div>`;
+      // OK probe but no metrics surfaced (Gemini, OpenRouter free-tier without
+      // credit cap, etc.). Render an info row so the card looks intentional —
+      // not a half-broken idle state.
+      body = `<div class="info-msg"><span class="info-dot"></span>${escapeHtml(data.note || '—')}</div>`;
+      foot = `<div class="c-foot"><span>${escapeHtml(footLeft)}</span><span class="right">${escapeHtml(t('reset.window'))}</span></div>`;
     }
   }
 
@@ -638,7 +862,7 @@ function renderProviders() {
         <button class="btn-primary" id="open-settings-cta">${escapeHtml(t('empty.heroCta'))}</button>
       </div>`;
     document.getElementById('open-settings-cta').addEventListener('click', () => {
-      document.querySelector('.sb-nav button[data-tab="settings"]').click();
+      document.querySelector('.sb-nav button[data-tab="providers"]').click();
     });
   } else {
     const ordered = sortedProviders();
@@ -646,7 +870,7 @@ function renderProviders() {
     body.querySelectorAll('[data-go-settings]').forEach((a) => {
       a.addEventListener('click', (e) => {
         e.preventDefault();
-        document.querySelector('.sb-nav button[data-tab="settings"]').click();
+        document.querySelector('.sb-nav button[data-tab="providers"]').click();
       });
     });
   }
@@ -721,6 +945,109 @@ function renderAbout() {
   `;
 }
 
+// ===== Notifications (Slack / Discord webhooks) =====
+//
+// Browser can't POST to hooks.slack.com directly (CORS). The relay lives in
+// server.js at /api/webhook/notify and re-POSTs server-to-server.
+async function sendWebhook(targetUrl, payload) {
+  try {
+    const r = await fetch('/api/webhook/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: targetUrl, payload }),
+    });
+    return r.ok;
+  } catch (_) {
+    return false;
+  }
+}
+
+function formatSlackPayload(transitions) {
+  const lines = transitions.map((tr) => {
+    const emoji = tr.sev === 'bad' ? ':red_circle:' : ':warning:';
+    const num = `${fmtNum(tr.used)} / ${fmtNum(tr.limit)}`;
+    return `${emoji}  *${tr.provider}* — ${tr.label}: ${tr.pct}%  (${num})`;
+  });
+  const headline = transitions.length === 1
+    ? 'LLM Limits — 1 alert'
+    : `LLM Limits — ${transitions.length} alerts`;
+  return {
+    text: headline,
+    blocks: [
+      { type: 'header', text: { type: 'plain_text', text: headline } },
+      { type: 'section', text: { type: 'mrkdwn', text: lines.join('\n') } },
+    ],
+  };
+}
+
+function formatDiscordPayload(transitions) {
+  const lines = transitions.map((tr) => {
+    const emoji = tr.sev === 'bad' ? '🔴' : '⚠️';
+    return `${emoji} **${tr.provider}** — ${tr.label}: ${tr.pct}%  (${fmtNum(tr.used)} / ${fmtNum(tr.limit)})`;
+  });
+  const anyBad = transitions.some((tr) => tr.sev === 'bad');
+  return {
+    username: 'LLM Limits',
+    embeds: [{
+      title: transitions.length === 1 ? '1 alert' : `${transitions.length} alerts`,
+      description: lines.join('\n'),
+      // Embed sidebar colour matches our severity palette.
+      color: anyBad ? 0xb94a4a : 0xc98e3f,
+      timestamp: new Date().toISOString(),
+    }],
+  };
+}
+
+// Compute upward severity transitions since the last refresh. Updates
+// state.alertedState in place and returns the list of transitions to alert on.
+function computeTransitions() {
+  const order = { ok: 0, warn: 1, bad: 2 };
+  const newAlerted = {};
+  const transitions = [];
+  PROVIDERS.forEach((p) => {
+    const data = state.lastResults[p.id];
+    if (!data || data.error || data.errored) return;
+    (data.metrics || []).forEach((m) => {
+      if (m.informational || !m.limit) return;
+      const pct = (m.used / m.limit) * 100;
+      let sev = 'ok';
+      if (pct >= state.thresholds.bad) sev = 'bad';
+      else if (pct >= state.thresholds.warn) sev = 'warn';
+      const key = `${p.id}.${m.label}`;
+      const prev = state.alertedState[key] || 'ok';
+      newAlerted[key] = sev;
+      if (order[sev] > order[prev]) {
+        transitions.push({
+          provider: p.name, label: m.label,
+          used: m.used, limit: m.limit,
+          pct: Math.round(pct), sev,
+        });
+      }
+    });
+  });
+  state.alertedState = newAlerted;
+  return transitions;
+}
+
+async function checkAndNotify() {
+  const slack = (state.webhooks.slack || '').trim();
+  const discord = (state.webhooks.discord || '').trim();
+  if (!slack && !discord) {
+    // Even with no webhooks set, keep alertedState fresh so once they ARE set
+    // we don't fire historical alerts.
+    computeTransitions();
+    saveState();
+    return;
+  }
+  const transitions = computeTransitions();
+  saveState();
+  if (transitions.length === 0) return;
+  const tasks = [];
+  if (slack)   tasks.push(sendWebhook(slack,   formatSlackPayload(transitions)));
+  if (discord) tasks.push(sendWebhook(discord, formatDiscordPayload(transitions)));
+  await Promise.all(tasks);
+}
+
 // ===== Refresh =====
 async function refreshAll() {
   const btn = document.getElementById('refresh-btn');
@@ -743,6 +1070,8 @@ async function refreshAll() {
     state.lastChecked = Date.now();
     renderProviders();
     if (anySucceeded) firePulse();
+    // Fire-and-forget — don't block UI on webhook delivery.
+    checkAndNotify();
   } finally {
     btn.disabled = false;
     btn.textContent = t('toolbar.refresh');

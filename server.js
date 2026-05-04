@@ -157,11 +157,20 @@ const providers = {
     }),
   },
 
-  openai:    { label: 'OpenAI · ChatGPT', probe: openaiCompat('api.openai.com',    '/v1/chat/completions',           'gpt-4o-mini') },
-  groq:      { label: 'Groq',             probe: openaiCompat('api.groq.com',      '/openai/v1/chat/completions',    'llama-3.1-8b-instant') },
-  fireworks: { label: 'Fireworks AI',     probe: openaiCompat('api.fireworks.ai',  '/inference/v1/chat/completions', 'accounts/fireworks/models/llama-v3p1-8b-instruct') },
-  mistral:   { label: 'Mistral',          probe: openaiCompat('api.mistral.ai',    '/v1/chat/completions',           'mistral-small-latest') },
-  together:  { label: 'Together AI',      probe: openaiCompat('api.together.xyz', '/v1/chat/completions',            'meta-llama/Llama-3.2-3B-Instruct-Turbo') },
+  openai:    { label: 'OpenAI · ChatGPT', probe: openaiCompat('api.openai.com', '/v1/chat/completions',        'gpt-4o-mini') },
+  groq:      { label: 'Groq',             probe: openaiCompat('api.groq.com',   '/openai/v1/chat/completions', 'llama-3.1-8b-instant') },
+
+  // DeepSeek doesn't return rate-limit headers on /chat/completions, but it
+  // does expose /user/balance — much more useful (real USD/CNY balance).
+  deepseek: {
+    label: 'DeepSeek',
+    probe: (key) => forward({
+      host: 'api.deepseek.com',
+      pathReq: '/user/balance',
+      method: 'GET',
+      headers: { Authorization: `Bearer ${key}` },
+    }),
+  },
 };
 
 // ---------- Cost endpoints (admin keys only) ----------
@@ -181,6 +190,64 @@ async function openAICost(adminKey, startUnix) {
     pathReq: `/v1/organization/costs?start_time=${startUnix}`,
     method: 'GET',
     headers: { Authorization: `Bearer ${adminKey}` },
+  });
+}
+
+// ---------- Outgoing webhooks (Slack / Discord) ----------
+//
+// The browser can't POST to hooks.slack.com directly because Slack rejects
+// browser CORS preflights. We relay through this endpoint instead. Allowlist
+// of upstream hosts is intentional — we don't want to be a generic SSRF proxy.
+const WEBHOOK_HOSTS = new Set([
+  'hooks.slack.com',
+  'discord.com',
+  'discordapp.com',
+  'ptb.discord.com',
+  'canary.discord.com',
+]);
+
+function readJsonBody(req, maxBytes = 64 * 1024) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let total = 0;
+    req.on('data', (c) => {
+      total += c.length;
+      if (total > maxBytes) {
+        req.destroy();
+        return reject(new Error('body too large'));
+      }
+      chunks.push(c);
+    });
+    req.on('end', () => {
+      try {
+        const buf = Buffer.concat(chunks).toString('utf8');
+        resolve(buf ? JSON.parse(buf) : {});
+      } catch (e) { reject(e); }
+    });
+    req.on('error', reject);
+  });
+}
+
+function postWebhook(targetUrl, payload) {
+  const u = new URL(targetUrl);
+  const body = JSON.stringify(payload);
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      host: u.hostname,
+      path: u.pathname + u.search,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
+    }, (resp) => {
+      const chunks = [];
+      resp.on('data', (c) => chunks.push(c));
+      resp.on('end', () => resolve({
+        status: resp.statusCode,
+        body: Buffer.concat(chunks).toString('utf8').slice(0, 512),
+      }));
+    });
+    req.on('error', reject);
+    req.write(body);
+    req.end();
   });
 }
 
@@ -222,6 +289,29 @@ const server = http.createServer(async (req, res) => {
     try {
       const start = Number(parsed.query.start) || Math.floor((Date.now() - 7 * 86400e3) / 1000);
       return send(res, 200, await openAICost(key, start));
+    } catch (e) {
+      return send(res, 502, { error: 'upstream failure', detail: String(e) });
+    }
+  }
+
+  // /api/webhook/notify — relay alerts to Slack / Discord webhook URLs.
+  // Body: { url, payload }. URL must be on the WEBHOOK_HOSTS allowlist.
+  if (pathname === '/api/webhook/notify' && req.method === 'POST') {
+    let body;
+    try { body = await readJsonBody(req); }
+    catch (e) { return send(res, 400, { error: 'invalid json body', detail: String(e) }); }
+    if (!body || typeof body.url !== 'string' || !body.payload) {
+      return send(res, 400, { error: 'expected { url, payload }' });
+    }
+    let parsedUrl;
+    try { parsedUrl = new URL(body.url); }
+    catch (_) { return send(res, 400, { error: 'invalid url' }); }
+    if (parsedUrl.protocol !== 'https:' || !WEBHOOK_HOSTS.has(parsedUrl.hostname)) {
+      return send(res, 400, { error: 'url not in allowed webhook hosts', allowed: [...WEBHOOK_HOSTS] });
+    }
+    try {
+      const result = await postWebhook(body.url, body.payload);
+      return send(res, 200, result);
     } catch (e) {
       return send(res, 502, { error: 'upstream failure', detail: String(e) });
     }

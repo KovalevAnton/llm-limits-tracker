@@ -26,9 +26,10 @@ If you build with multiple LLMs, you already know the routine: production hits a
 
 ## Features
 
-- **8 providers out of the box** — Anthropic, OpenAI, Google Gemini, OpenRouter, Groq, Fireworks, Mistral, Together
+- **6 providers out of the box** — Anthropic, OpenAI, Google Gemini, OpenRouter, Groq, DeepSeek. Each card shows real numbers, not just "alive / dead" status.
 - **Real rate-limit data** — read straight from the providers' response headers (RPM, TPM, input/output tokens)
 - **Threshold alerts** — warning at 80%, critical at 95% (configurable)
+- **Slack & Discord webhooks** — paste a webhook URL in Settings and get pinged the moment a metric crosses a threshold. Fires only on upward transitions, so no spam.
 - **Auto-refresh** — optional 60-second polling
 - **Auto-save settings** — paste a key and it's saved + probed on the spot, no Save button
 - **Three themes** — Apple Glass (light & dark) and a green-on-black Hacker mode
@@ -38,11 +39,13 @@ If you build with multiple LLMs, you already know the routine: production hits a
 
 ## Themes
 
+Three themes (`Glass Light`, `Glass Dark`, `Hacker`) with a global aurora toggle that adds or drops the colourful background gradient on the glass variants.
+
 <table>
 <tr>
-<td><img src="assets/themes/screenshot1.png" alt="Glass Light theme" /></td>
-<td><img src="assets/themes/screenshot2.png" alt="Glass Dark theme" /></td>
-<td><img src="assets/themes/screenshot3.png" alt="Hacker theme" /></td>
+<td><img src="assets/themes/screenshot3.png" alt="Glass Light, plain" /></td>
+<td><img src="assets/themes/screenshot2.png" alt="Glass Dark, plain" /></td>
+<td><img src="assets/themes/screenshot5.png" alt="Hacker theme" /></td>
 </tr>
 <tr>
 <td align="center"><sub><b>Glass Light</b> · warm cream, refined</sub></td>
@@ -52,16 +55,16 @@ If you build with multiple LLMs, you already know the routine: production hits a
 </table>
 
 <details>
-<summary>More views</summary>
+<summary>Aurora variants</summary>
 
 <table>
 <tr>
-<td><img src="assets/themes/screenshot4.png" alt="Settings page" /></td>
-<td><img src="assets/themes/screenshot5.png" alt="Empty state" /></td>
+<td><img src="assets/themes/screenshot4.png" alt="Glass Light with aurora background" /></td>
+<td><img src="assets/themes/screenshot1.png" alt="Glass Dark with aurora background" /></td>
 </tr>
 <tr>
-<td align="center"><sub>Settings</sub></td>
-<td align="center"><sub>First-run empty state</sub></td>
+<td align="center"><sub><b>Glass Light · aurora</b></sub></td>
+<td align="center"><sub><b>Glass Dark · aurora</b></sub></td>
 </tr>
 </table>
 
@@ -87,16 +90,14 @@ To expose it on your LAN (e.g. for a TV dashboard), set `HOST=0.0.0.0`. The defa
 
 ## What you get per provider
 
-| Provider     | Metrics                                   | Source                               |
-|--------------|--------------------------------------------|---------------------------------------|
-| Anthropic    | RPM, input TPM, output TPM, total TPM      | `anthropic-ratelimit-*` headers       |
-| OpenAI       | RPM, TPM                                   | `x-ratelimit-*` headers               |
-| OpenRouter   | Credit balance, RPM (interval-based)       | `/api/v1/auth/key` JSON               |
-| Groq         | RPM, TPM                                   | `x-ratelimit-*` headers               |
-| Fireworks AI | RPM, TPM                                   | `x-ratelimit-*` headers               |
-| Mistral      | RPM, TPM                                   | `x-ratelimit-*` headers               |
-| Together AI  | RPM, TPM                                   | `x-ratelimit-*` headers               |
-| Gemini       | API status (200 / 429 / auth)              | response status (no rate-limit headers) |
+| Provider      | Metrics                                | Source                                   |
+|---------------|-----------------------------------------|-------------------------------------------|
+| Anthropic     | RPM, input TPM, output TPM, total TPM   | `anthropic-ratelimit-*` headers           |
+| OpenAI        | RPM, TPM                                | `x-ratelimit-*` headers                   |
+| Groq          | RPM, TPM                                | `x-ratelimit-*` headers                   |
+| OpenRouter    | Credit balance, RPM (interval)          | `/api/v1/auth/key` JSON                   |
+| DeepSeek      | USD / CNY balance                       | `/user/balance` JSON                      |
+| Google Gemini | API status (200 / 429 / auth)           | response status (no rate-limit headers)   |
 
 ## What it does NOT show
 
@@ -118,8 +119,8 @@ API keys are stored only in your browser's `localStorage` and travel to the prox
 
 ## Roadmap
 
+- [x] Slack / Discord webhook alerts at threshold crossings *(v0.3.0)*
 - [ ] Browser extension for chat-subscription limits (Claude Pro/Max, ChatGPT Plus, Gemini Advanced)
-- [ ] Slack / Discord webhook alerts at threshold crossings
 - [ ] Persistent history (SQLite) and 7-day usage graphs
 - [ ] Per-project tagging — log which app burned which quota
 - [ ] More providers — Cohere, Replicate, Perplexity, DeepInfra, Anyscale

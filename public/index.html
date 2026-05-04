@@ -49,7 +49,8 @@
     </div>
     <nav class="sb-nav">
       <button type="button" data-tab="dashboard" class="active" data-i18n="nav.dashboard"></button>
-      <button type="button" data-tab="settings" data-i18n="nav.settings"></button>
+      <button type="button" data-tab="providers" data-i18n="nav.providers"></button>
+      <button type="button" data-tab="alerts" data-i18n="nav.alerts"></button>
       <button type="button" data-tab="about" data-i18n="nav.about"></button>
     </nav>
 
@@ -96,11 +97,17 @@
       <div id="dashboard-body"></div>
     </section>
 
-    <section id="tab-settings" class="hidden">
-      <h1 class="h2" data-i18n="settings.title"></h1>
-      <p class="subtitle" data-i18n="settings.subtitle"></p>
+    <section id="tab-providers" class="hidden">
+      <h1 class="h2" data-i18n="providers.title"></h1>
+      <p class="subtitle" data-i18n="providers.subtitle"></p>
       <div class="grid" id="settings-grid"></div>
-      <div class="card threshold-card">
+    </section>
+
+    <section id="tab-alerts" class="hidden">
+      <h1 class="h2" data-i18n="alerts.title"></h1>
+      <p class="subtitle" data-i18n="alerts.subtitle"></p>
+
+      <div class="card">
         <h3 class="h3" data-i18n="settings.thresholds"></h3>
         <p class="help" data-i18n="settings.thresholdsHelp"></p>
         <div class="threshold-row">
@@ -111,6 +118,25 @@
           <div>
             <label data-i18n="settings.badLabel"></label>
             <input type="text" id="threshold-bad" value="95" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card threshold-card">
+        <h3 class="h3" data-i18n="notifications.title"></h3>
+        <p class="help" data-i18n="notifications.help"></p>
+        <div class="webhook-row">
+          <label data-i18n="notifications.slackLabel"></label>
+          <div class="key-row">
+            <input type="text" id="webhook-slack" placeholder="https://hooks.slack.com/services/..." />
+            <button type="button" class="show-key test-webhook" data-target="slack" data-i18n="notifications.test"></button>
+          </div>
+        </div>
+        <div class="webhook-row">
+          <label data-i18n="notifications.discordLabel"></label>
+          <div class="key-row">
+            <input type="text" id="webhook-discord" placeholder="https://discord.com/api/webhooks/..." />
+            <button type="button" class="show-key test-webhook" data-target="discord" data-i18n="notifications.test"></button>
           </div>
         </div>
       </div>

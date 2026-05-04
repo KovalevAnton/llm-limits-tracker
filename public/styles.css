@@ -720,6 +720,21 @@ strong { font-weight: 600; }
 .idle-cta a { color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--border-strong); padding-bottom: 1px; cursor: pointer; }
 .idle-cta a:hover { color: var(--text); }
 
+/* Info-state — used when an OK probe carries a note but no metrics
+   (e.g. Gemini, OpenRouter free-tier without a credit cap). Looks
+   intentional, not "empty". */
+.info-msg {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 4px 0 8px;
+  font-size: 13.5px; color: var(--text-muted); line-height: 1.5;
+}
+.info-dot {
+  flex-shrink: 0;
+  width: 8px; height: 8px; margin-top: 6px; border-radius: 999px;
+  background: var(--good);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--good) 18%, transparent);
+}
+
 .err-block {
   font: 12.5px/1.5 var(--mono); color: var(--text-muted);
   background: var(--surface-2); border-radius: 10px;
@@ -767,6 +782,10 @@ input[type=text]:focus, input[type=password]:focus {
 .threshold-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
 .threshold-row > div { display: flex; flex-direction: column; gap: 8px; }
 .threshold-card { margin-top: 16px; }
+
+/* Webhook URL inputs in Settings — vertical stack, one row per provider. */
+.webhook-row { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.webhook-row + .webhook-row { margin-top: 16px; }
 .configured-tag {
   font: 500 10.5px/1 var(--ui); text-transform: uppercase; letter-spacing: 0.06em;
   color: var(--good); display: inline-flex; align-items: center; gap: 4px;
